@@ -2,8 +2,10 @@ from guizero import App, Text, TextBox, PushButton, Window
 import ipaddress
 import re
 
+
 def check_regex():
     reg = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(?:[1-9]|1[0-9]|2[0-9]|3[0-2])$"
+
     if not ip_input_box.value:
         return
     x = re.match(reg, ip_input_box.value)
@@ -15,7 +17,20 @@ def check_regex():
 
 def show_next_window():
     window = Window(app, title="Wynik")
-    Text(window, text=ip_input_box.value)
+    network = ipaddress.IPv4Network(ip_input_box.value)
+    network_net_text = "Adres sieci: " + str(network.network_address)
+    network_text = Text(window, network_net_text)
+    network_broad_text = "Adres broadcast: " + str(network.broadcast_address)
+    network_broad = Text(window, network_broad_text)
+    network_mask_text = "Maska sieci: " + str(network.netmask)
+    network_mask = Text(window, network_mask_text)
+    network_host_text = "Maksymalna liczba hostów: " + str(network.num_addresses)
+    network_host = Text(window, network_host_text)
+    network_bit_text = "Długość prefixu sieci w bitach:" + str(network.prefixlen)
+    network_bit = Text(window, network_bit_text)
+
+
+
 
 app = App(title="Liczenie adresów IP")
 entry_text = Text(app, text="Podaj adres IP wraz z maską w formacie x.x.x.x/x")
