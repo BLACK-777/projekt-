@@ -4,15 +4,15 @@ import re
 
 # część zabezpieczająca przed podaniem złego adresu ip lub podania go w zlym formacie
 def check_regex():
-    reg = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(?:[1-9]|1[0-9]|2[0-9]|3[0-2])$"
+    reg = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(?:[1-9]|1[0-9]|2[0-9]|3[0-2])$"  #szablon adresu ip
 
-    if not ip_input_box.value:
+    if not ip_input_box.value:   # jesli nic nie jest wpisane ta czesc zatrzymuje sprawdzanie zeby nie marnowac zasobow
         return
     x = re.match(reg, ip_input_box.value)
-    if x == None:
+    if x == None:                # ukrycie przycisku przy wpisaniu błednego adresu
         test_button.hide()
     else:
-        test_button.show()
+        test_button.show()               # ponowne pokazanie przycisku jesli adres ip zgadza sie z szablonem
         ip_input_box.cancel(check_regex)
 # okienko pokazujące wykonane obliczenia
 def show_next_window():
@@ -28,7 +28,7 @@ def show_next_window():
     network_host = Text(window, network_host_text)
     network_bit_text = "Długość prefixu sieci w bitach:" + str(network.prefixlen)
     network_bit = Text(window, network_bit_text)
-    def close_window():
+    def close_window():    #funkcja pozwalajaca na zamkniecie okienka wynikow bez koniecznosci zamykania calego prgramu
         window.hide()
     close = PushButton(window, text="Zamknij", command = close_window)
 
