@@ -17,11 +17,15 @@ def is_proper_input(typed_value):
 def show_next_window():
     window = Window(app, title="Wynik")
     network = ipaddress.IPv4Network(ip_input_box.value)
+
     network_net_text = "Adres sieci: " + str(network.network_address)
     network_text = Text(window, network_net_text)
     network_broad_text = "Adres broadcast: " + str(network.broadcast_address)
     network_broad = Text(window, network_broad_text)
     network_us = Text(window, text = "Użytkowe adresy znajdują sie między adresem ip a adresem broadcast")
+    us_button = PushButton(window, text="pokaż uzytkowe adresy", command = ip_adress_list)
+
+
     network_mask_text = "Maska sieci: " + str(network.netmask)
     network_mask = Text(window, network_mask_text)
     network_host_text = "Maksymalna liczba hostów: " + str(network.num_addresses)
@@ -31,6 +35,47 @@ def show_next_window():
     def close_window():    #funkcja pozwalajaca na zamkniecie okienka wynikow bez koniecznosci zamykania calego prgramu
         window.hide()
     close = PushButton(window, text="Zamknij", command = close_window)
+
+
+def ip_adress_list():
+    network = ipaddress.IPv4Network(ip_input_box.value)
+    mask = str(network.prefixlen)
+    x = str(network.network_address)
+
+    lista = list(range(0, 256))
+    lista1 = list(range(0, 128))
+    lista2 = list(range(0, 64))
+    lista3 = list(range(0, 32))
+    lista4 = list(range(0, 16))
+    lista5 = list(range(0, 8))
+    lista6 = list(range(0, 4))
+    lista7 = list(range(0, 2))
+    if mask == "24":
+        for i in lista:
+            print(x, i)
+    if mask == "25":
+        for i in lista1:
+            print(x, i)
+    if mask == "26":
+        for i in lista2:
+            print(x, i)
+    if mask == "27":
+        for i in lista3:
+            print(x, i)
+    if mask == "28":
+        for i in lista4:
+            print(x, i)
+    if mask == "29":
+        for i in lista5:
+            print(x, i)
+    if mask == "30":
+        for i in lista6:
+            print(x, i)
+    if mask == "31":
+        for i in lista7:
+            print(x, i)
+
+
 
 
 def show_element(element):
