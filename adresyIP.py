@@ -2,7 +2,7 @@ from guizero import App, Text, TextBox, PushButton, Window
 import ipaddress
 import re
 
-
+# część zabezpieczająca przed podaniem złego adresu ip lub podania go w zlym formacie
 def check_regex():
     reg = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(?:[1-9]|1[0-9]|2[0-9]|3[0-2])$"
 
@@ -14,7 +14,7 @@ def check_regex():
     else:
         test_button.show()
         ip_input_box.cancel(check_regex)
-
+# okienko pokazujące wykonane obliczenia
 def show_next_window():
     window = Window(app, title="Wynik")
     network = ipaddress.IPv4Network(ip_input_box.value)
@@ -34,7 +34,7 @@ def show_next_window():
 
 
 
-
+# główna część aplikacji pozwalająca na wpisanie adresu ip
 app = App(title="Liczenie adresów IP")
 entry_text = Text(app, text="Podaj adres IP wraz z maską w formacie x.x.x.x/x")
 example_text = Text(app, text="Przykład: 192.161.1.0/25")
