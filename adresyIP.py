@@ -28,13 +28,20 @@ def show_next_window():
     network_host = Text(window, network_host_text)
     network_bit_text = "Długość prefixu sieci w bitach:" + str(network.prefixlen)
     network_bit = Text(window, network_bit_text)
+    def close_window():
+        window.hide()
+    close = PushButton(window, text="Zamknij", command = close_window)
 
 
 
 
 app = App(title="Liczenie adresów IP")
 entry_text = Text(app, text="Podaj adres IP wraz z maską w formacie x.x.x.x/x")
+example_text = Text(app, text="Przykład: 192.161.1.0/25")
 ip_input_box = TextBox(app, width=20)
 test_button = PushButton(app, command=show_next_window)
 ip_input_box.repeat(1000, check_regex)
 app.display()
+
+
+
