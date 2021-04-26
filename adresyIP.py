@@ -5,9 +5,9 @@ import re
 # część zabezpieczająca przed podaniem złego adresu ip lub podania go w zlym formacie
 def is_proper_input(typed_value):
     reg = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(?:[1-9]|1[0-9]|2[0-9]|3[0-2])$"  #szablon adresu ip
-    if re.match(reg, typed_value):
+    if re.match(reg, typed_value):      # funkcja pozwalajaca na korzystanie z zabezpieczenia wiecej niz jeden raz
         try:
-            ipaddress.IPv4Network(ip_input_box.value)
+            ipaddress.IPv4Network(ip_input_box.value) # przy podaniu poprawnego adresu ip zostaje on przejety przez funkcje python 'ipaddress'
         except ValueError:
             return False
         else:
@@ -40,11 +40,11 @@ def show_element(element):
 def verify_proper_ip_address_and_mask_were_passed():
     if is_proper_input(ip_input_box.value):
         test_button.show()
-        error_text.hide()
-    else:
-        error_text.value = f'Błędnie wpisana sieć/maska - obliczenie nie możliwe'
-        error_text.show()
-        test_button.hide()
+        error_text.hide()                                                                        # funkcja pokazujaca i
+    else:                                                                                        # ukrywajaca przycisk
+        error_text.value = f'Błędnie wpisana sieć/maska - obliczenie nie możliwe'                # chroniąca przed próbą
+        error_text.show()                                                                        # obliczen przy zlym
+        test_button.hide()                                                                       # formacie adresu
 
 # główna część aplikacji pozwalająca na wpisanie adresu ip
 app = App(title="Liczenie adresów IP")
